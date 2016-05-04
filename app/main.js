@@ -9,6 +9,12 @@ app.use(express.static('public'))
 app.set('views', __dirname + '/views')
 app.set('view engine', 'ejs')
 
+// set view locals
+app.use(function (req, res, next) {
+  app.locals.route = req.url
+  next()
+})
+
 // mount routes
 app.get('/', function (req, res) { res.redirect('home') })
 app.get('/home', pages.home)
